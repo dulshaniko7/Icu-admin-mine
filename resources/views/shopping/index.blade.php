@@ -6,8 +6,8 @@
 
         <div style="margin-bottom: 10px;" class="row">
             @foreach($products as $product)
-                <div class="col-lg-3 mb-5">
-                    <div class="card" style="width: 25rem;">
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-5">
+                    <div class="card" style="">
                         <div class="card-body">
                             @if($product->image)
                                 <a href="{{ $product->image->getUrl() }}" target="_blank" style="display: block">
