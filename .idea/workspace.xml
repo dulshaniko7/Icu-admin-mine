@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b8dddb03-9387-44f2-ac91-25a87fae61f5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dev-sl-admin-3133b5cfd61dd554 (3).iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dev-sl-admin-3133b5cfd61dd554 (3).iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Shop/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Shop/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/shopping/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/shopping/checkout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +175,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/shopping" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -197,11 +208,23 @@
       <workItem from="1602771542659" duration="14014000" />
       <workItem from="1602828596338" duration="11146000" />
       <workItem from="1602900028049" duration="8172000" />
+      <workItem from="1603085539124" duration="1685000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="251" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602757425214">
@@ -221,22 +244,22 @@
       <screen x="0" y="0" width="1920" height="951" />
     </state>
     <state x="696" y="96" key="Github.UntrackedFilesDialog/0.0.1920.951@0.0.1920.951" timestamp="1602597335136" />
-    <state width="1877" height="246" key="GridCell.Tab.0.bottom" timestamp="1602691350499">
+    <state width="1877" height="246" key="GridCell.Tab.0.bottom" timestamp="1603086459869">
       <screen x="0" y="0" width="1920" height="951" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.bottom/0.0.1920.951@0.0.1920.951" timestamp="1602691350499" />
-    <state width="1877" height="246" key="GridCell.Tab.0.center" timestamp="1602691350499">
+    <state width="1877" height="246" key="GridCell.Tab.0.bottom/0.0.1920.951@0.0.1920.951" timestamp="1603086459869" />
+    <state width="1877" height="246" key="GridCell.Tab.0.center" timestamp="1603086459869">
       <screen x="0" y="0" width="1920" height="951" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.center/0.0.1920.951@0.0.1920.951" timestamp="1602691350499" />
-    <state width="1877" height="246" key="GridCell.Tab.0.left" timestamp="1602691350498">
+    <state width="1877" height="246" key="GridCell.Tab.0.center/0.0.1920.951@0.0.1920.951" timestamp="1603086459869" />
+    <state width="1877" height="246" key="GridCell.Tab.0.left" timestamp="1603086459869">
       <screen x="0" y="0" width="1920" height="951" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.left/0.0.1920.951@0.0.1920.951" timestamp="1602691350498" />
-    <state width="1877" height="246" key="GridCell.Tab.0.right" timestamp="1602691350499">
+    <state width="1877" height="246" key="GridCell.Tab.0.left/0.0.1920.951@0.0.1920.951" timestamp="1603086459869" />
+    <state width="1877" height="246" key="GridCell.Tab.0.right" timestamp="1603086459869">
       <screen x="0" y="0" width="1920" height="951" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.right/0.0.1920.951@0.0.1920.951" timestamp="1602691350499" />
+    <state width="1877" height="246" key="GridCell.Tab.0.right/0.0.1920.951@0.0.1920.951" timestamp="1603086459869" />
     <state x="717" y="182" key="NewPhpClassDialog" timestamp="1602651848246">
       <screen x="0" y="0" width="1920" height="951" />
     </state>
