@@ -181,12 +181,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\sl_projects\dev-sl-admin-3133b5cfd61dd554 (3)\database\migrations\old" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\dulsan\Documents\GitHub\lcu-admin" />
       <recent name="D:\sl_projects\dev-sl-admin-3133b5cfd61dd554 (3)\resources\views\shopping" />
       <recent name="D:\sl_projects\dev-sl-admin-3133b5cfd61dd554 (3)\database\migrations" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\sl_projects\dev-sl-admin-3133b5cfd61dd554 (3)\database\migrations\old" />
     </key>
   </component>
   <component name="RunManager">
@@ -208,7 +209,7 @@
       <workItem from="1602771542659" duration="14014000" />
       <workItem from="1602828596338" duration="11146000" />
       <workItem from="1602900028049" duration="8172000" />
-      <workItem from="1603085539124" duration="1685000" />
+      <workItem from="1603085539124" duration="3119000" />
     </task>
     <servers />
   </component>

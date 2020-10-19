@@ -12,15 +12,7 @@
                                 <storng>{{ $product['item']['product_name'] }}</storng>
                                 <span class="label-success">{{$product['item']['product_price']}} INR</span>
 
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary btn-xs dropdown-toggle"
-                                            data-toggle="dropdown">Action
-                                        <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="">Reduce by 1</a></li>
-                                        <li><a href="">Reduce All</a></li>
-                                    </ul>
-                                </div>
+
                             </li>
                         @endforeach
                     </ul>
