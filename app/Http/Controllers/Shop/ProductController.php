@@ -23,8 +23,6 @@ class ProductController extends Controller
         $user = auth()->user();
         $country = $user->country;
         $country_id = $country->id;
-
-
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
@@ -121,18 +119,16 @@ class ProductController extends Controller
 
     public function payment(Request $request)
     {
-        //  print_r($request->all());
-        // exit();
+
         $signatureStatus = $this->signatureVerify(
             $request->all()['rzp_signature'],
             $request->all()['rzp_orderid'],
             $request->all()['rzp_paymentid'],
         );
 
-        if($signatureStatus == true){
+        if ($signatureStatus == true) {
             return view('shopping.payment-success-page');
-        }
-        else{
+        } else {
             return view('shopping.payment-failed-page');
         }
     }
