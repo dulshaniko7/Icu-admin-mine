@@ -29,8 +29,8 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::all()->pluck('title', 'id');
-
-        return view('admin.users.create', compact('roles'));
+        $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        return view('admin.users.create', compact('roles','countries'));
     }
 
     public function store(StoreUserRequest $request)
