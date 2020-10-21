@@ -20,7 +20,7 @@
 
                             <!--firstName-->
                             <div class="md-form ">
-                                <input type="text" id="firstName" name="name" class="form-control">
+                                <input type="text"  name="name" class="form-control">
                                 <label for="firstName" class="">Name</label>
                             </div>
 

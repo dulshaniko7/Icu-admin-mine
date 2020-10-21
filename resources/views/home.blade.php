@@ -20,6 +20,8 @@
             </div>
         </div>
     </div>
+    <a href="{{route('profile')}}"><button class="btn btn-primary btn-sm">Profile</button></a>
+
 </div>
 @endsection
 @section('scripts')

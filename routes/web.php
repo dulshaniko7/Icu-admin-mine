@@ -90,8 +90,14 @@ Route::group(['prefix' => 'shop', 'as' => 'user.', 'namespace' => 'Shop', 'middl
     Route::get('/checkout', 'ProductController@getCheckout')->name('checkout');
     Route::post('/payment-initiate-request', 'ProductController@initiate')->name('init');
     Route::post('/payment-complete', 'ProductController@payment')->name('payment');
+
 });
 
+
+Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
+    Route::get('/profile', 'HomeController@getProfile')->name('profile');
+
+});
 
 /*
 

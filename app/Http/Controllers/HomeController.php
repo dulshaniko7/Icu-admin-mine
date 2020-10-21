@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,5 +25,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function getProfile()
+    {
+        $orders = Auth::user()->orders;
+        $orders->transform(function ($order, $key){
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+
+        return view('client.profile', compact('orders'));
     }
 }

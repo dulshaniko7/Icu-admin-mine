@@ -6,9 +6,11 @@ use App\Cart;
 use App\Country;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\TaxResource;
+use App\Order;
 use App\Product;
 use App\Tax;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -113,6 +115,22 @@ class ProductController extends Controller
             'address' => $request->all()['address'],
             'description' => 'Testing Description'
         ];
+        if (!Session::has('cart')) {
+            return redirect()->route('user.home');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+        $order = new Order();
+        $order->cart = serialize($cart);
+        $order->email = $request->email;
+        $order->user_name = $request->name;
+        $order->amount = $request->amount;
+        //$order->payment_id = $payment_id;
+        $order->address = $request->address;
+
+        Auth::user()->orders()->save($order);
+
 
         return view('shopping.payment', compact('response'));
     }
@@ -126,8 +144,16 @@ class ProductController extends Controller
             $request->all()['rzp_paymentid'],
         );
 
+        $payment_id = $request['rzp_paymentid'];
+        $order_id = $request['rzp_orderid'];
+        $signature = $request['rzp_signature'];
+
+
+
+
         if ($signatureStatus == true) {
-            return view('shopping.payment-success-page');
+            Session::forget('cart');
+            return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
         } else {
             return view('shopping.payment-failed-page');
         }
@@ -141,7 +167,7 @@ class ProductController extends Controller
             $order = $api->utility->verifyPaymentSignature($attributes);
             return true;
         } catch (\Exception $e) {
-            return false;
+            return $e;
         }
     }
 
