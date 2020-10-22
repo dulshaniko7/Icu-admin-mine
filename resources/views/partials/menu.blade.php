@@ -89,6 +89,17 @@
                     </a>
                 </li>
             @endcan
+            @can('student_access')
+                <li class="{{ request()->is("student/home") || request()->is("student/home/*") ? "active" : "" }}">
+                    <a href="{{ route("students.index") }}">
+                        <i class="fa-fw fas fa-user-graduate">
+
+                        </i>
+                        <span>Student</span>
+
+                    </a>
+                </li>
+            @endcan
             @can('user_alert_access')
                 <li class="{{ request()->is("admin/user-alerts") || request()->is("admin/user-alerts/*") ? "active" : "" }}">
                     <a href="{{ route("admin.user-alerts.index") }}">

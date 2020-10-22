@@ -4,18 +4,24 @@ namespace App\Http\Controllers\Shop;
 
 use App\Cart;
 use App\Country;
+use App\Exports\StudentsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\TaxResource;
 use App\Order;
 use App\Product;
+use App\Student;
 use App\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Razorpay\Api\Api;
+use Csv;
+use Maatwebsite\Excel\Concerns\FromCollection;
+
 
 class ProductController extends Controller
 {
@@ -149,8 +155,6 @@ class ProductController extends Controller
         $signature = $request['rzp_signature'];
 
 
-
-
         if ($signatureStatus == true) {
             Session::forget('cart');
             return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
@@ -171,4 +175,31 @@ class ProductController extends Controller
         }
     }
 
+    public function assignCreate($id)
+    {
+        $product = Product::find($id);
+        $students = Student::all();
+        return view('student.assign', compact('students', 'product'));
+    }
+
+    public function assignStore(Request $request)
+    {
+
+        $product_id = $request->product_id;
+        $product = Product::find($product_id);
+
+        $product->update($request->all());
+        $product->students()->sync($request->input('students', []));
+
+        return redirect()->route('profile');
+
+    }
+
+    public function exportData($id)
+    {
+        return (new StudentsExport)->forProduct($id)->download('students.xlsx');
+    }
+
 }
+
+

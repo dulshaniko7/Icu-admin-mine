@@ -58,4 +58,8 @@ class Product extends Model implements HasMedia
 
         return $file;
     }
+
+    public function students(){
+        return $this->belongsToMany(Student::class);
+    }
 }

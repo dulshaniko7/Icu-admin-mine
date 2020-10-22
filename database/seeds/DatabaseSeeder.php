@@ -6,7 +6,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-       //factory(\App\Product::class,10)->create();
+        //factory(\App\Product::class,10)->create();
+        // factory(\App\Student::class, 30)->create();
         $this->call([
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
@@ -14,7 +15,6 @@ class DatabaseSeeder extends Seeder
             CountriesTableSeeder::class,
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
-
 
 
         ]);
