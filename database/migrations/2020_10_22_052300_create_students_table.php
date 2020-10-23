@@ -20,6 +20,8 @@ class CreateStudentsTable extends Migration
             $table->string('email',100);
             $table->string('contact',100);
             $table->string('school_name',100);
+            $table->unsignedInteger('product_id')->nullable();
+
             $table->timestamps();
         });
     }

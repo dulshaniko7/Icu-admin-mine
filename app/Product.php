@@ -62,4 +62,6 @@ class Product extends Model implements HasMedia
     public function students(){
         return $this->belongsToMany(Student::class);
     }
+
+
 }

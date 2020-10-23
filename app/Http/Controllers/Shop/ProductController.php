@@ -189,16 +189,42 @@ class ProductController extends Controller
         $product = Product::find($product_id);
 
         $product->update($request->all());
+
         $product->students()->sync($request->input('students', []));
 
         return redirect()->route('profile');
 
     }
 
-    public function exportData($id)
+    public function exportData()
     {
-        return (new StudentsExport)->forProduct($id)->download('students.xlsx');
+
+        return Excel::download(new StudentsExport(),'student.csv');
     }
+    /*
+    public function assignStore(Request $request)
+    {
+
+        $product_id = $request->product_id;
+        $product = Product::find($product_id);
+
+        $product->update($request->all());
+        $product->students()->sync($request->input('students', []));
+
+        $students = DB::select(
+            'select students.first_name, students.last_name, students.email, students.contact, students.school_name
+                from products
+                INNER JOIN product_student
+                ON products.id = product_student.product_id
+                INNER JOIN students
+                on product_student.student_id = students.id
+                WHERE products.id = ?', [$product_id]);
+
+        return redirect()->route('user.export',compact('students'));
+        //return redirect()->route('profile');
+
+    }
+    */
 
 }
 
