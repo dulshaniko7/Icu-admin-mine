@@ -60,7 +60,7 @@ class Product extends Model implements HasMedia
     }
 
     public function students(){
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class,'product_student','product_id','student_id');
     }
 
 

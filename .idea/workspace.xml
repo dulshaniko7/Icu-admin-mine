@@ -23,10 +23,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Exports/StudentsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/StudentsExport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Shop/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Shop/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_22_052300_create_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_22_052300_create_students_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/student/assign.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/student/assign.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,14 +192,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Users\dulsan\Documents\GitHub\lcu-admin\resources\views\student" />
-      <recent name="D:\sl_projects\dev-sl-admin-3133b5cfd61dd554 (3)\database\migrations\old" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Users\dulsan\Documents\GitHub\lcu-admin" />
       <recent name="D:\sl_projects\dev-sl-admin-3133b5cfd61dd554 (3)\resources\views\shopping" />
       <recent name="D:\sl_projects\dev-sl-admin-3133b5cfd61dd554 (3)\database\migrations" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\dulsan\Documents\GitHub\lcu-admin\resources\views\student" />
+      <recent name="D:\sl_projects\dev-sl-admin-3133b5cfd61dd554 (3)\database\migrations\old" />
     </key>
   </component>
   <component name="RunManager">
@@ -281,9 +281,10 @@
       <screen x="0" y="0" width="1920" height="951" />
     </state>
     <state x="717" y="182" key="NewPhpClassDialog/0.0.1920.951@0.0.1920.951" timestamp="1602651848246" />
-    <state x="795" y="394" key="NewPhpFileDialog" timestamp="1603418471165">
-      <screen x="0" y="0" width="1920" height="951" />
+    <state x="566" y="265" key="NewPhpFileDialog" timestamp="1603450175897">
+      <screen x="0" y="0" width="1366" height="639" />
     </state>
+    <state x="566" y="265" key="NewPhpFileDialog/0.0.1366.639@0.0.1366.639" timestamp="1603450175897" />
     <state x="795" y="394" key="NewPhpFileDialog/0.0.1920.951@0.0.1920.951" timestamp="1603418471165" />
     <state x="461" y="120" key="SettingsEditor" timestamp="1602828918393">
       <screen x="0" y="0" width="1920" height="951" />
