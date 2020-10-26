@@ -88,12 +88,14 @@ Route::group(['prefix' => 'shop', 'as' => 'user.', 'namespace' => 'Shop', 'middl
     Route::get('/add-to-cart/{id}', 'ProductController@getAddToCart')->name('cart.add');
     Route::get('/shopping-cart', 'ProductController@getCart')->name('cart');
     Route::get('/checkout', 'ProductController@getCheckout')->name('checkout');
+    Route::get('/reduce/{id}','ProductController@getReduceByOne')->name('reduce');
+    Route::get('/remove/{id}','ProductController@getRemoveItem')->name('remove');
     Route::post('/payment-initiate-request', 'ProductController@initiate')->name('init');
     Route::post('/payment-complete', 'ProductController@payment')->name('payment');
     Route::get('/checkout', 'ProductController@getCheckout')->name('checkout');
     Route::get('/upload/{id}', 'ProductController@assignCreate')->name('upload.create');
     Route::put('/upload/{id}', 'ProductController@assignstore')->name('upload.store');
-
+   // Route::get('/exportData', 'ProductController@exportData')->name('export');
     Route::get('/csv_export/{id}', 'ProductController@exportData')->name('csv');
 });
 Route::group(['prefix' => 'student', 'namespace' => 'Student', 'middleware' => ['auth']], function () {

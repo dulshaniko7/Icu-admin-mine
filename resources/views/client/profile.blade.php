@@ -11,8 +11,8 @@
                         <div class="card-body">
                             <h3 class="card-title">{{ $item['item']['product_name'] }}</h3>
                             <p class="card-text">{{ $item['item']['description'] }}</p>
-                            <h4>Purchase Quantity -: {{ $item['qty'] }}</h4>
-                            <h4><a class="btn btn-primary" href="{{ route('user.export',$item['item']['id']) }}">Upload Student CSV </a></h4>
+                           <!-- <h4>Purchase Quantity -: {{ $item['qty'] }}</h4> -->
+
                             <h4><a class="btn btn-primary" href="{{ route('user.upload.create',$item['item']['id']) }}">Assign Student to Product</a></h4>
 
                         </div>
