@@ -4,10 +4,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
+                @can('user_management_access')
                 <div class="panel-heading">
                     Dashboard
                 </div>
-
+                @endcan
                 <div class="panel-body">
                     @if(session('status'))
                         <div class="alert alert-success" role="alert">
@@ -20,7 +21,7 @@
             </div>
         </div>
     </div>
-    <a href="{{route('profile')}}"><button class="btn btn-primary btn-sm">Profile</button></a>
+
 
 </div>
 @endsection

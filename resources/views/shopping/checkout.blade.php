@@ -7,8 +7,8 @@
                 <h2>Checkout</h2>
                 <h5>Total Tax: {{ $with_tax}}</h5>
 
-                <h4>Your Total: {{ $total }} INR</h4>
-                <h4>Your Total with Tax: {{ $total_with_tax }} INR</h4>
+                <h4>Your Total: INR {{ $total }}</h4>
+                <h4>Your Total with Tax: INR {{ $total_with_tax }} </h4>
                 <form action="{{ route('user.init') }}" method="post" class="card-body">
                     <input type="hidden" value="{{ csrf_token() }}" name="_token">
 

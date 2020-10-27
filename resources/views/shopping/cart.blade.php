@@ -10,7 +10,7 @@
                             <li class="list-group-item">
                                 <span class="badge-success badge float-right">{{ $product['qty'] }}</span>
                                 <storng>{{ $product['item']['product_name'] }}</storng>
-                                <span class="label-success">{{$product['item']['product_price']}} INR</span>
+                                <span class="label-success ml-3">INR {{$product['item']['product_price']}} </span>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary btn-xs dropdown-toogle ml-5" data-toggle="dropdown">Action <span class="caret"></span></button>
                                     <ul class="dropdown-menu">

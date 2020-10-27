@@ -2,8 +2,8 @@
 @section('content')
     <div class="row container">
         <div class="col-lg-8">
-            <h2>User Profile</h2>
-            <h3>My Orders</h3>
+
+            <h3>My Purchases</h3>
             @foreach($orders as $order)
 
                 @foreach($order->cart->items as $item)

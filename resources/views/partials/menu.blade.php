@@ -1,12 +1,22 @@
 <aside class="main-sidebar">
     <section class="sidebar" style="height: auto;">
         <ul class="sidebar-menu tree" data-widget="tree">
+            @can('user_management_access')
             <li>
                 <a href="{{ route("admin.home") }}">
                     <i class="fas fa-fw fa-tachometer-alt">
 
                     </i>
                     {{ trans('global.dashboard') }}
+                </a>
+            </li>
+            @endcan
+            <li>
+                <a href="{{route('profile')}}">
+                    <i class="fas fa-fw fa-shipping-fast">
+
+                    </i>
+                   My Purchases
                 </a>
             </li>
             @can('user_management_access')
