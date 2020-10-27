@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h2>Your Shopping Cart</h2>
         @if(Session::has('cart'))
             <div class="row">
                 <div class="col-sm-6 col-md-6">

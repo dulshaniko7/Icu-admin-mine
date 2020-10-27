@@ -232,6 +232,28 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 56,
                 'title' => 'shopping_delete',
             ],
+            [
+                'id'    => 57,
+                'title' => 'student_access',
+            ],
+            [
+                'id'    => 58,
+                'title' => 'student_show',
+            ],
+            [
+                'id'    => 59,
+                'title' => 'student_edit',
+            ],
+            [
+                'id'    => 60,
+                'title' => 'student_delete',
+            ],
+            [
+                'id'    => 61,
+                'title' => 'student_create',
+            ],
+
+
         ];
 
         Permission::insert($permissions);
