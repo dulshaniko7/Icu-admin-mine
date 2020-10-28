@@ -1,5 +1,5 @@
 <aside class="main-sidebar">
-    <section class="sidebar" style="height: auto;">
+    <section class="sidebar" style="line-height: 25px;font-size: 15px; font-family:'Helvetica Neue','Helvetica','Arial', 'Helvetica', 'sans-serif';">
         <ul class="sidebar-menu tree" data-widget="tree">
             @can('user_management_access')
             <li>

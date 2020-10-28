@@ -37,7 +37,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+   <!-- <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> -->
 </head>
 
 <body class="sidebar-mini skin-purple" style="height: auto; min-height: 100%;">

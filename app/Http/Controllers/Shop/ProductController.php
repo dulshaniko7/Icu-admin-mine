@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
@@ -87,7 +88,7 @@ class ProductController extends Controller
 
             $p = $tax_percentages[$i];
             $tax_as_no = $p->tax_percentage;
-            $tax_as_per = $tax_as_no/100;
+            $tax_as_per = $tax_as_no / 100;
             $with_tax += $total * $tax_as_per;
         }
 
@@ -131,7 +132,7 @@ class ProductController extends Controller
 
         $order = new Order();
         $order->cart = serialize($cart);
-        $order->email =Auth::user()->email ;
+        $order->email = Auth::user()->email;
         $order->user_name = Auth::user()->name;
         $order->amount = $request->amount;
         //$order->payment_id = $payment_id;
@@ -159,7 +160,7 @@ class ProductController extends Controller
 
         if ($signatureStatus == true) {
             Session::forget('cart');
-           // return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
+            // return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
             return view('home');
         } else {
             return view('shopping.payment-failed-page');
@@ -234,6 +235,36 @@ class ProductController extends Controller
             Session::forget('cart');
         }
         return redirect()->route('user.cart');
+    }
+
+
+    public function importFile($qty)
+    {
+       $order_qty = $qty;
+        return view('import.student-list',compact('order_qty'));
+    }
+
+    public function importCsv(Request $request)
+    {
+
+$qty = $request->order_qty;
+
+        $validator = Validator::make($request->all(), [
+            'file' => 'required'
+        ]);
+
+
+        if ($validator->passes()) {
+            $dataTime = date('Ymd_His');
+            $file = $request->file('file');
+
+            $fileName = $dataTime . '-' . $file->getClientOriginalName();
+            $savePath = public_path('/upload/');
+            $file->move($savePath, $fileName);
+            return redirect()->back()->with(['success' => 'File uploaded successfully.']);
+        } else {
+            return redirect()->back()->with(['errors' => $validator->errors()->all()]);
+        }
     }
 
 

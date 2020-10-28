@@ -114,7 +114,8 @@
                     </div>
                 </div>
             @endif
-            @if($errors->count() > 0)
+
+          {{--  @if($errors->count() > 0)
                 <div class="row" style='padding:20px 20px 0 20px;'>
                     <div class="col-lg-12">
                         <div class="alert alert-danger">
@@ -126,7 +127,8 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
+
             @yield('content')
         </div>
         <footer class="main-footer text-center">

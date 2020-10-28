@@ -97,6 +97,10 @@ Route::group(['prefix' => 'shop', 'as' => 'user.', 'namespace' => 'Shop', 'middl
     Route::put('/upload/{id}', 'ProductController@assignstore')->name('upload.store');
    // Route::get('/exportData', 'ProductController@exportData')->name('export');
     Route::get('/csv_export/{id}', 'ProductController@exportData')->name('csv');
+
+    Route::get('/import/{qty}', 'ProductController@importFile')->name('import');
+    Route::post('/import', 'ProductController@importCsv')->name('import.store');
+
 });
 Route::group(['prefix' => 'student', 'namespace' => 'Student', 'middleware' => ['auth']], function () {
     //Route::get('/home', 'StudentController@index')->name('home');
