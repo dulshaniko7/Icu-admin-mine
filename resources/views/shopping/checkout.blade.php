@@ -19,10 +19,7 @@
                         <div class="col-md-12 mb-2">
 
                             <!--firstName-->
-                            <div class="md-form ">
-                                <input type="text"  name="name" class="form-control">
-                                <label for="firstName" class="">Name</label>
-                            </div>
+
 
                         </div>
                         <!--Grid column-->
@@ -37,24 +34,14 @@
                     <!--Username-->
 
                     <!--email-->
-                    <div class="md-form mb-10">
-                        <input type="text" id="email" class="form-control" name="email" placeholder="youremail@example.com">
-                        <label for="email" class="">Email </label>
-                    </div>
-                    <div class="md-form mb-10">
-                        <input type="text" id="number" class="form-control" name="contactNumber" placeholder="youremail@example.com">
-                        <label for="number" class="">Contact Number </label>
-                    </div>
+
                     <!-- amount -->
                     <div class="md-form mb-10">
                         <input type="text" id="amount" class="form-control" placeholder="" name="amount" value="{{ $total_with_tax }}">
                         <label for="amount" class=""></label>
                     </div>
                     <!--address-->
-                    <div class="md-form mb-10">
-                        <input type="text" id="address" class="form-control"name="address" placeholder="1234 Main St">
-                        <label for="address" class="">Address</label>
-                    </div>
+
 
                     <!--address-2-->
 

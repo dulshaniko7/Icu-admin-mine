@@ -116,11 +116,11 @@ class ProductController extends Controller
             'orderId' => $order['id'],
             'razorpayId' => $this->razorpayId,
             'amount' => $request->all()['amount'] * 100,
-            'name' => $request->all()['name'],
+            'name' => 'test',
             'currency' => 'INR',
-            'email' => $request->all()['email'],
-            'contactNumber' => $request->all()['contactNumber'],
-            'address' => $request->all()['address'],
+            'email' => 'dul@gmail.com',
+            'contactNumber' => '11111111',
+            'address' => 'test add',
             'description' => 'Testing Description'
         ];
         if (!Session::has('cart')) {
@@ -131,11 +131,11 @@ class ProductController extends Controller
 
         $order = new Order();
         $order->cart = serialize($cart);
-        $order->email = $request->email;
-        $order->user_name = $request->name;
+        $order->email =Auth::user()->email ;
+        $order->user_name = Auth::user()->name;
         $order->amount = $request->amount;
         //$order->payment_id = $payment_id;
-        $order->address = $request->address;
+
 
         Auth::user()->orders()->save($order);
 
