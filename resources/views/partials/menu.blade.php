@@ -121,7 +121,8 @@
                     </a>
                 </li>
             @endcan
-            @can('client_management_access')
+
+          <!--  @can('client_management_access')
                 <li class="treeview">
                     <a href="#">
                         <i class="fa-fw fas fa-cogs">
@@ -166,7 +167,8 @@
                         @endcan
                     </ul>
                 </li>
-            @endcan
+            @endcan -->
+
             @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                 @can('profile_password_edit')
                     <li class="{{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}">

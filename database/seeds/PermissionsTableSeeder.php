@@ -252,8 +252,6 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 61,
                 'title' => 'student_create',
             ],
-
-
         ];
 
         Permission::insert($permissions);

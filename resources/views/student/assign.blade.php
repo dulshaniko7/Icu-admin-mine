@@ -31,7 +31,7 @@
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-danger" type="submit">
-                                  Save and Export
+                                  Save and CSV Export
                                 </button>
                             </div>
                         </form>

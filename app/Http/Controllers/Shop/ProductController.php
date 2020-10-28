@@ -86,7 +86,9 @@ class ProductController extends Controller
         for ($i = 0; $i < count($tax_percentages); $i++) {
 
             $p = $tax_percentages[$i];
-            $with_tax += $total * $p->tax_percentage;
+            $tax_as_no = $p->tax_percentage;
+            $tax_as_per = $tax_as_no/100;
+            $with_tax += $total * $tax_as_per;
         }
 
         $total_with_tax = $total + $with_tax;
@@ -157,7 +159,8 @@ class ProductController extends Controller
 
         if ($signatureStatus == true) {
             Session::forget('cart');
-            return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
+           // return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
+            return view('home');
         } else {
             return view('shopping.payment-failed-page');
         }

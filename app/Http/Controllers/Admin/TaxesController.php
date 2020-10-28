@@ -34,6 +34,7 @@ class TaxesController extends Controller
 
     public function store(StoreTaxRequest $request)
     {
+
         $tax = Tax::create($request->all());
         $tax->countries()->sync($request->input('countries', []));
 

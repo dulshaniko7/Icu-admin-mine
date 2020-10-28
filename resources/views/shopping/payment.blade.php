@@ -25,6 +25,7 @@
                 alert(response.razorpay_order_id);
                 alert(response.razorpay_signature)
             },
+
             "prefill": {
                 "name": "{{ $response['name'] }}",
                 "email": "{{ $response['email'] }}",
@@ -33,6 +34,7 @@
             "notes": {
                 "address": "{{ $response['address'] }}"
             },
+
             "theme": {
                 "color": "#F37254"
             }

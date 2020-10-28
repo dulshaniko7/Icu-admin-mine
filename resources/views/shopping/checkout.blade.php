@@ -45,7 +45,7 @@
                         <input type="text" id="number" class="form-control" name="contactNumber" placeholder="youremail@example.com">
                         <label for="number" class="">Contact Number </label>
                     </div>
-                    <!-- amount -->>
+                    <!-- amount -->
                     <div class="md-form mb-10">
                         <input type="text" id="amount" class="form-control" placeholder="" name="amount" value="{{ $total_with_tax }}">
                         <label for="amount" class=""></label>
