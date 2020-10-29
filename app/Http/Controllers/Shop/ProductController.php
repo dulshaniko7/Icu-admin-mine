@@ -122,11 +122,10 @@ class ProductController extends Controller
             'email' => 'dul@gmail.com',
             'contactNumber' => '11111111',
             'address' => 'test add',
-            'description' => 'Testing Description'
+            'description' => 'Testing Description',
+            'quantity' => $request->all()['quantity']
         ];
-        if (!Session::has('cart')) {
-            return redirect()->route('user.home');
-        }
+
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
 
@@ -135,11 +134,56 @@ class ProductController extends Controller
         $order->email = Auth::user()->email;
         $order->user_name = Auth::user()->name;
         $order->amount = $request->amount;
+        $order->quantity = $request->quantity;
         //$order->payment_id = $payment_id;
 
 
         Auth::user()->orders()->save($order);
 
+
+        return view('shopping.payment', compact('response'));
+    }
+
+    public function initiateNew(Request $request)
+    {
+
+        $receiptId = Str::random(20);
+
+        $api = new Api($this->razorpayId, $this->razorpayKey);
+        $order = $api->order->create(array(
+                'receipt' => $receiptId,
+                'amount' => $request->all()['amount'] * 100,
+                'currency' => 'INR'
+            )
+        );
+
+        $response = [
+            'orderId' => $order['id'],
+            'razorpayId' => $this->razorpayId,
+            'amount' => $request->all()['amount'] * 100,
+            'name' => 'test',
+            'currency' => 'INR',
+            'email' => 'dul@gmail.com',
+            'contactNumber' => '11111111',
+            'address' => 'test add',
+            'description' => 'Testing Description',
+            'quantity' => $request->all()['quantity']
+        ];
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+        $order = new Order();
+        // $order->cart = serialize($cart);
+        $order->email = Auth::user()->email;
+        $order->user_name = Auth::user()->name;
+        $order->amount = $request->amount;
+        $order->quantity = $request->quantity;
+        //$order->payment_id = $payment_id;
+        $product = Product::find($request->product_id);
+
+        Auth::user()->orders()->save($order);
+        $product->orders()->save($order);
 
         return view('shopping.payment', compact('response'));
     }
@@ -240,14 +284,14 @@ class ProductController extends Controller
 
     public function importFile($qty)
     {
-       $order_qty = $qty;
-        return view('import.student-list',compact('order_qty'));
+        $order_qty = $qty;
+        return view('import.student-list', compact('order_qty'));
     }
 
     public function importCsv(Request $request)
     {
 
-$qty = $request->order_qty;
+        $qty = $request->order_qty;
 
         $validator = Validator::make($request->all(), [
             'file' => 'required'
@@ -265,6 +309,59 @@ $qty = $request->order_qty;
         } else {
             return redirect()->back()->with(['errors' => $validator->errors()->all()]);
         }
+    }
+
+    public function storeNewCheckout(Request $request)
+    {
+        $q = $request->qty;
+        $p = $request->price;
+        $product_id = $request->product_id;
+        $user = auth()->user();
+        $country = $user->country;
+        $country_id = $country->id;
+
+        $t = TaxResource::collection(
+            Tax::all()
+        );
+
+        $tax_percentages = DB::select(
+            'select taxes.tax_percentage
+            from countries
+            INNER JOIN country_tax
+            ON countries.id = country_tax.country_id
+            INNER JOIN taxes
+            on country_tax.tax_id = taxes.id
+            WHERE countries.id = ?', [$country_id]);
+
+
+        $tax = $country->countryTaxes();
+
+
+        $with_tax = 0;
+
+        $total = $p * $q;
+
+        for ($i = 0; $i < count($tax_percentages); $i++) {
+
+            $p = $tax_percentages[$i];
+            $tax_as_no = $p->tax_percentage;
+            $tax_as_per = $tax_as_no / 100;
+            $with_tax += $total * $tax_as_per;
+        }
+
+        $total_with_tax = $total + $with_tax;
+
+        return view('shopping.checkout', ['total' => $total, 'with_tax' => $with_tax, 'total_with_tax' => $total_with_tax, 'quantity' => $q, 'product_id' => $product_id]);
+
+    }
+
+    public function viewProduct($order)
+    {
+        $o = Order::find($order);
+        $p = $o->product_id;
+      $product = Product::find($p);
+
+        return view('client.productShow',compact('product','o'));
     }
 
 

@@ -3,10 +3,10 @@
     <div class="container">
         <div class="row">
             <h2>CSV upload Page</h2>
-            <p>Please Upload {{$order_qty}} students data as per order quantity.sample download is given below </p>
-            <form action="{{route('user.import.store')}}" method="post" enctype="multipart/form-data">
+            <p>Please Upload {{$order_qty ?? ''}} students data as per order quantity.sample download is given below </p>
+            <form action="{{route('upload.importPost')}}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                <input type="hidden" name="order_qty" value="{{$order_qty}}">
+                <input type="hidden" name="order_qty" value="{{$order_qty ?? ''}}">
                 @if(session('errors'))
                     @foreach($errors as $error)
                         <li>{{ $error }}</li>
@@ -17,8 +17,8 @@
                 @endif
 
                 <br><br><br>
-
-                <input type="file" name="file" id="file">
+                <input type="text" name="product_id" value="{{$product_id}}">
+                <input type="file" name="file" id="file" required>
                 <br>
                 <button type="submit">Upload</button>
                 <br><br><br>

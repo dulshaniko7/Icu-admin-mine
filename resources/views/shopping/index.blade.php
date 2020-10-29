@@ -17,10 +17,22 @@
                             @endif
                             <h5 class="card-title">{{$product->product_name}}</h5>
                             <p class="card-text">{{$product->description}}</p>
-                            <h5>{{ $product->product_price }}INR</h5>
-                            <h6>{{ $product->tax }}</h6>
-                            <a href="{{ route('user.cart.add',$product->id) }}" class="btn btn-primary float-right">Add to Card
-                            </a>
+                            <h5 class="float-right">Product Price - {{ $product->product_price }}INR</h5>
+                                <br>
+                                <hr>
+                        <!-- <a href="{{ route('user.cart.add',$product->id) }}" class="btn btn-primary float-right">Add to Card  </a> -->
+
+                            <form action="{{route('user.checkout.new.store')}}" method="post">
+                                @csrf
+                                <div class="form-group row float-right">
+                                <div class="col-xs-1">
+                                    <input class="form-control" name="qty" type="text" placeholder="quantity">
+                                </div>
+                                </div>
+                                <input type="hidden" name="price" value="{{ $product->product_price }}">
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <button type="submit" class="btn btn-primary">Buy</button>
+                            </form>
                         </div>
 
                     </div>

@@ -90,9 +90,11 @@ Route::group(['prefix' => 'shop', 'as' => 'user.', 'namespace' => 'Shop', 'middl
     Route::get('/checkout', 'ProductController@getCheckout')->name('checkout');
     Route::get('/reduce/{id}','ProductController@getReduceByOne')->name('reduce');
     Route::get('/remove/{id}','ProductController@getRemoveItem')->name('remove');
-    Route::post('/payment-initiate-request', 'ProductController@initiate')->name('init');
+    Route::post('/payment-initiate-request', 'ProductController@initiateNew')->name('init');
     Route::post('/payment-complete', 'ProductController@payment')->name('payment');
     Route::get('/checkout', 'ProductController@getCheckout')->name('checkout');
+    Route::get('/checkout-new','ProductController@getNewCheckout')->name('checkout.new');
+    Route::post('/checkout-new','ProductController@storeNewCheckout')->name('checkout.new.store');
     Route::get('/upload/{id}', 'ProductController@assignCreate')->name('upload.create');
     Route::put('/upload/{id}', 'ProductController@assignstore')->name('upload.store');
    // Route::get('/exportData', 'ProductController@exportData')->name('export');
@@ -101,6 +103,8 @@ Route::group(['prefix' => 'shop', 'as' => 'user.', 'namespace' => 'Shop', 'middl
     Route::get('/import/{qty}', 'ProductController@importFile')->name('import');
     Route::post('/import', 'ProductController@importCsv')->name('import.store');
 
+    Route::get('/product/{order}', 'ProductController@viewProduct')->name('product.details');
+
 });
 Route::group(['prefix' => 'student', 'namespace' => 'Student', 'middleware' => ['auth']], function () {
     //Route::get('/home', 'StudentController@index')->name('home');
@@ -108,8 +112,16 @@ Route::group(['prefix' => 'student', 'namespace' => 'Student', 'middleware' => [
 
 });
 
+Route::group(['prefix' => 'upload', 'namespace' => 'Upload','as'=>'upload.', 'middleware' => ['auth']], function () {
+    //Route::get('/home', 'StudentController@index')->name('home');
+    Route::get('import/{id}','UploadStudentController@create')->name('import');
+    Route::post('import','UploadStudentController@store')->name('importPost');
+});
+
+
 Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
     Route::get('/profile', 'HomeController@getProfile')->name('profile');
+    Route::get('/purchases','HomeController@getPurchases')->name('purchases');
 
 });
 

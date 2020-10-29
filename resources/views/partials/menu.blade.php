@@ -12,7 +12,7 @@
             </li>
             @endcan
             <li>
-                <a href="{{route('profile')}}">
+                <a href="{{route('purchases')}}">
                     <i class="fas fa-fw fa-shipping-fast">
 
                     </i>

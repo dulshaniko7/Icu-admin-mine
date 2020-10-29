@@ -4,11 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-6 ">
-                <h2>Checkout</h2>
+                <h2 class="mb-4">Checkout</h2>
+                <h5>Quantity : {{ $quantity }}</h5>
                 <h5>Total Tax: {{ $with_tax}}</h5>
 
-                <h4>Your Total: INR {{ $total }}</h4>
-                <h4>Your Total with Tax: INR {{ $total_with_tax }} </h4>
+                <h4>Your Total for {{ $quantity }}: INR {{ $total }}</h4>
+                <h4>Your Total for {{ $quantity }} Tax: INR {{ $total_with_tax }} </h4>
                 <form action="{{ route('user.init') }}" method="post" class="card-body">
                     <input type="hidden" value="{{ csrf_token() }}" name="_token">
 
@@ -40,6 +41,8 @@
                         <input type="text" id="amount" class="form-control" placeholder="" name="amount" value="{{ $total_with_tax }}">
                         <label for="amount" class=""></label>
                     </div>
+                    <input type="hidden" name="quantity" value="{{$quantity}}">
+                    <input type="hidden" name="product_id" value="{{$product_id}}">
                     <!--address-->
 
 
