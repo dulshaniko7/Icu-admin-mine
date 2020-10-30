@@ -68,7 +68,7 @@ class UploadStudentController extends Controller
 
 
             // Table update
-            for ($i = 0; $i < 10; $i++) {
+            for ($i = 0; $i < $quantity; $i++) {
                 $firstname = $data['firstname'];
                 $lastname = $data['lastname'];
                 $email = $data['email'];
