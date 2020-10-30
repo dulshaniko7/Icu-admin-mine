@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Upload;
 
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\UploadStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,13 +12,23 @@ class UploadStudentController extends Controller
 {
     public function create($id)
     {
-        $product_id = $id;
+        //  $product_id = $id;
+        $order_id = $id;
 
-        return view('import.student-list',compact('product_id'));
+
+        return view('import.student-list', compact('order_id'));
     }
 
     public function store(Request $request)
     {
+        $order_id = $request->order_id;
+
+        //get product of the order
+        $order = Order::find($order_id);
+        $quantity = $order->quantity;
+
+        $product_id = $order->product_id;
+
 
         $validator = Validator::make($request->all(), [
             'file' => 'required'
@@ -25,9 +36,10 @@ class UploadStudentController extends Controller
 
 
         $dataTime = date('Ymd_His');
-        $file1 = $request->file('file');
-        $filePath = $file1->getRealPath();
+        $upload = $request->file('file');
+        $filePath = $upload->getRealPath();
         $file = fopen($filePath, 'r');
+
         $header = fgetcsv($file);
 
 
@@ -40,28 +52,35 @@ class UploadStudentController extends Controller
 
             array_push($escapedHeader, $escapedItem);
         }
+
+
         while ($columns = fgetcsv($file)) {
-            if ($columns[0] == "") {
-                continue;
+
+            foreach ($columns as $key => &$value) {
+                $value = $value;
             }
 
+
             $data = array_combine($escapedHeader, $columns);
-
             // Table update
-            $firstname = $data['firstname'];
-            $lastname = $data['lastname'];
-            $email = $data['email'];
-            $contact = $data['contact'];
-            $school = $data['schoolname'];
+            for ($i = 0; $i < $quantity; $i++) {
+                $firstname = $data['firstname'];
+                $lastname = $data['lastname'];
+                $email = $data['email'];
+                $contact = $data['contact'];
+                $school = $data['schoolname'];
 
-            $upStudent = new UploadStudent();
-            $upStudent->first_name = $firstname;
-            $upStudent->last_name = $lastname;
-            $upStudent->email = $email;
-            $upStudent->contact = $contact;
-            $upStudent->school_name = $school;
-            $upStudent->save();
-            return redirect()->back()->with(['success' => 'File uploaded successfully.']);
+                $upStudent = UploadStudent::firstOrNew(['email' => $email, 'first_name' => $firstname]);
+                $upStudent->first_name = $firstname;
+                $upStudent->last_name = $lastname;
+                $upStudent->email = $email;
+                $upStudent->contact = $contact;
+                $upStudent->school_name = $school;
+                $upStudent->order_id = $order_id;
+                $upStudent->product_id = $product_id;
+                $upStudent->save();
+            }
+
 
 
         }

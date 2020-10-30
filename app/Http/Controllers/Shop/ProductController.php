@@ -11,6 +11,7 @@ use App\Order;
 use App\Product;
 use App\Student;
 use App\Tax;
+use App\UploadStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -358,10 +359,13 @@ class ProductController extends Controller
     public function viewProduct($order)
     {
         $o = Order::find($order);
+        $q = $o->quantity;
+       $quantity = $q;
         $p = $o->product_id;
-      $product = Product::find($p);
+        $product = Product::find($p);
+        $students = UploadStudent::where('order_id', $order)->get();
 
-        return view('client.productShow',compact('product','o'));
+        return view('client.productShow', compact('product', 'o', 'students','quantity'));
     }
 
 

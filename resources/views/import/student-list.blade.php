@@ -17,7 +17,7 @@
                 @endif
 
                 <br><br><br>
-                <input type="text" name="product_id" value="{{$product_id}}">
+                <input type="hidden" name="order_id" value="{{$order_id}}">
                 <input type="file" name="file" id="file" required>
                 <br>
                 <button type="submit">Upload</button>
