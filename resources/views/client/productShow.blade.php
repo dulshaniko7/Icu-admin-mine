@@ -23,7 +23,7 @@
     <div class="container row">
 
         <div class="col-lg-12">
-            <div class="card mt-4">
+            <div class="card mt-4 mb-4">
                 <div class="card-body">
                     <h1 class="cart-title text-center"> Students assign for this product</h1>
                     <table class="table">

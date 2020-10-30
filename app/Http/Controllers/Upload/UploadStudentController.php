@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\UploadStudent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UploadStudentController extends Controller
@@ -21,6 +22,7 @@ class UploadStudentController extends Controller
 
     public function store(Request $request)
     {
+        $orders = Auth::user()->orders;
         $order_id = $request->order_id;
 
         //get product of the order
@@ -62,8 +64,11 @@ class UploadStudentController extends Controller
 
 
             $data = array_combine($escapedHeader, $columns);
+
+
+
             // Table update
-            for ($i = 0; $i < $quantity; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 $firstname = $data['firstname'];
                 $lastname = $data['lastname'];
                 $email = $data['email'];
@@ -82,7 +87,7 @@ class UploadStudentController extends Controller
             }
 
 
-
         }
+        return view('client.purchases',compact('orders'));
     }
 }
