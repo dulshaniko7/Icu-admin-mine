@@ -1,10 +1,11 @@
 @extends('layouts.user')
 
 @section('content')
-    <h1 class="text-center">Product Description</h1>
+
     <div class="container row">
 
         <div class="col-lg-12">
+            <h1 class="text-center  mt-2 mb-2"><u>Product Description</u></h1>
             <div class="card mt-4">
                 <div class="card-body">
                     <h1 class="cart-title text-center"> {{ $product->product_name }}</h1>

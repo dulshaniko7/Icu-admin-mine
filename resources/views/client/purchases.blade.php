@@ -1,13 +1,13 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 
 @section('content')
-    <div class="row container">
-        <div class="col-lg-8">
+    <div class="container row">
 
-            <h3>My Purchases Orders</h3>
+        <div class="col-lg-12">
+            <h1 class="text-center mt-2 mb-2"><u>My Purchases </u></h1>
             @foreach($orders as $order)
 
-                <div class="card">
+                <div class="card mb-2 mt-4">
                     <div class="card-body">
                         <h1 class="card-title">{{ $order->product->product_name }}</h1>
 
