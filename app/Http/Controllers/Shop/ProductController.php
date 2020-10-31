@@ -107,6 +107,7 @@ class ProductController extends Controller
         $receiptId = Str::random(20);
 
         $api = new Api($this->razorpayId, $this->razorpayKey);
+       // $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
         $order = $api->order->create(array(
                 'receipt' => $receiptId,
                 'amount' => $request->all()['amount'] * 100,
