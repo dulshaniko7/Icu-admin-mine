@@ -1,6 +1,6 @@
-<aside class="main-sidebar">
+<aside class="main-sidebar" style="background-color:#232b2b" >
     <section class="sidebar" style="line-height: 25px;font-size: 15px; font-family:'Helvetica Neue','Helvetica','Arial', 'Helvetica', 'sans-serif';">
-        <ul class="sidebar-menu tree" data-widget="tree">
+        <ul class="sidebar-menu tree new-menu" data-widget="tree">
             @can('user_management_access')
             <li>
                 <a href="{{ route("admin.home") }}">

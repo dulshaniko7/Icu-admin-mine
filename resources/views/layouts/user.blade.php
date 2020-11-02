@@ -77,7 +77,45 @@
                 </div>
             @endif
 
-
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-bell-o"></i>
+                            @php($alertsCount = \Auth::user()->userUserAlerts()->where('read', false)->count())
+                            @if($alertsCount > 0)
+                                <span class="label label-warning">
+                                            {{ $alertsCount }}
+                                        </span>
+                            @endif
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="slimScrollDiv" style="position: relative;">
+                                    <ul class="menu">
+                                        @if(count($alerts = \Auth::user()->userUserAlerts()->withPivot('read')->limit(10)->orderBy('created_at', 'ASC')->get()->reverse()) > 0)
+                                            @foreach($alerts as $alert)
+                                                <li>
+                                                    <a href="{{ $alert->alert_link ? $alert->alert_link : "#" }}" target="_blank" rel="noopener noreferrer">
+                                                        @if($alert->pivot->read === 0) <strong> @endif
+                                                            {{ $alert->alert_text }}
+                                                            @if($alert->pivot->read === 0) </strong> @endif
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        @else
+                                            <li style="text-align:center;">
+                                                {{ trans('global.no_alerts') }}
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+<!--
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
@@ -91,7 +129,7 @@
 
                 </ul>
             </div>
-
+-->
         </nav>
     </header>
 

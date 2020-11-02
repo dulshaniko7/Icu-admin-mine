@@ -1,4 +1,32 @@
 .ck-editor__editable,
+
+.new-body{
+
+}
+.new-body nav{
+    background-color: #2C9A2C;
+
+}
+
+.new-body nav a{
+    color: white;
+
+}
+.new-body .main-header{
+    background-color: #2C9A2C;
+
+}
+.new-body .main-header a{
+    color: white;
+}
+
+.new-menu a{
+    color: white !important;
+}
+
+
+
+
 textarea {
     min-height: 150px;
 }

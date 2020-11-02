@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container row">
@@ -7,7 +7,7 @@
             <h1 class="text-center mt-2 mb-2"><u>My Purchases </u></h1>
             @foreach($orders as $order)
 
-                <div class="card mb-2 mt-4">
+                <div class="card mb-2 mt-4" style="margin-bottom: 10px">
                     <div class="card-body">
                         <h1 class="card-title">{{ $order->product->product_name }}</h1>
 

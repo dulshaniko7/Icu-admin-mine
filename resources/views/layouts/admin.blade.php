@@ -25,16 +25,16 @@
 
     @yield('styles')
 </head>
-
-<body class="sidebar-mini skin-purple" style="height: auto; min-height: 100%;">
+<!-- <body class="sidebar-mini  skin-purple" style="height: auto; min-height: 100%;"> -->
+<body class="new-body" style="height: auto; min-height: 100%;">
     <div class="wrapper" style="height: auto; min-height: 100%;">
-        <header class="main-header">
+        <header class="main-header" >
             <a href="#" class="logo">
                 <span class="logo-mini"><b>{{ trans('panel.site_title') }}</b></span>
                 <span class="logo-lg">{{ trans('panel.site_title') }}</span>
             </a>
 
-            <nav class="navbar navbar-static-top">
+            <nav class="navbar navbar-static-top" >
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">{{ trans('global.toggleNavigation') }}</span>
                 </a>
