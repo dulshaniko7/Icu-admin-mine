@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -38,7 +38,7 @@
 
                     <!-- amount -->
                     <div class="md-form mb-10">
-                        <input type="text" id="amount" class="form-control" placeholder="" name="amount" value="{{ $total_with_tax }}">
+                        <input type="hidden" id="amount" class="form-control" placeholder="" name="amount" value="{{ $total_with_tax }}">
                         <label for="amount" class=""></label>
                     </div>
                     <input type="hidden" name="quantity" value="{{$quantity}}">
