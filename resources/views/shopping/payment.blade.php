@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <button id="rzp-button1">Pay</button>
+    <button id="rzp-button1" hidden>Pay</button>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         var options = {

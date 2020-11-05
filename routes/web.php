@@ -91,12 +91,12 @@ Route::group(['prefix' => 'shop', 'as' => 'user.', 'namespace' => 'Shop', 'middl
     Route::get('/reduce/{id}','ProductController@getReduceByOne')->name('reduce');
     Route::get('/remove/{id}','ProductController@getRemoveItem')->name('remove');
     Route::post('/payment-initiate-request', 'ProductController@initiateNew')->name('init');
-  //  Route::post('/payment-initiate-request', 'ProductController@initiateQuick')->name('init');
+   // Route::post('/payment-initiate-request', 'ProductController@initiateQuick')->name('init');
     Route::post('/payment-complete', 'ProductController@payment')->name('payment');
    // Route::post('/payment-complete', 'ProductController@paymentQuick')->name('payment');
 
     Route::get('/checkout', 'ProductController@getCheckout')->name('checkout');
-   // Route::get('/checkout-new','ProductController@getNewCheckout')->name('checkout.new');
+ //  Route::get('/checkout-new','ProductController@storeNewCheckout')->name('checkout.new');
     Route::post('/checkout-new','ProductController@storeNewCheckout')->name('checkout.new.store');
     Route::get('/upload/{id}', 'ProductController@assignCreate')->name('upload.create');
     Route::put('/upload/{id}', 'ProductController@assignstore')->name('upload.store');
@@ -108,6 +108,11 @@ Route::group(['prefix' => 'shop', 'as' => 'user.', 'namespace' => 'Shop', 'middl
 
     Route::get('/product/{order}', 'ProductController@viewProduct')->name('product.details');
 
+    //ne razor pay
+    Route::post('/payment','ProductController@paymentQuick' )->name('quick.payment');
+    Route::get('/payment','ProductController@getPaymentQuick')->name('quick.payment');
+
+    Route::post('/pay','ProductController@payQuick' )->name('quick.pay');
 });
 Route::group(['prefix' => 'student', 'namespace' => 'Student', 'middleware' => ['auth']], function () {
     //Route::get('/home', 'StudentController@index')->name('home');

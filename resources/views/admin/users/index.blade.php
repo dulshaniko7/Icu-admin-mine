@@ -43,6 +43,9 @@
                                         Country
                                     </th>
                                     <th>
+                                        Mobile
+                                    </th>
+                                    <th>
                                         &nbsp; &nbsp;
                                     </th>
                                 </tr>
@@ -72,6 +75,9 @@
                                         </td>
                                         <td>
                                             {{ $user->country->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $user->mobile ?? '' }}
                                         </td>
                                         <td>
                                             @can('user_show')

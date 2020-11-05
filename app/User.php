@@ -38,6 +38,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'country_id',
+        'mobile',
         'created_at',
         'updated_at',
         'deleted_at',

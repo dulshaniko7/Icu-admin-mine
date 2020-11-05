@@ -59,6 +59,22 @@
                                         @endforeach
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                       Country
+                                    </th>
+                                    <td>
+                                        {{ $user->country->short_code ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                      Mobile
+                                    </th>
+                                    <td>
+                                        {{ $user->mobile }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

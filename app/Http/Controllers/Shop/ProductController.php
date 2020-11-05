@@ -165,10 +165,10 @@ class ProductController extends Controller
             'orderId' => $order['id'],
             'razorpayId' => $this->razorpayId,
             'amount' => $request->all()['amount'] * 100,
-            'name' => 'test',
+            'name' => Auth::user()->name,
             'currency' => 'INR',
-            'email' => 'dul@gmail.com',
-            'contactNumber' => '11111111',
+            'email' => Auth::user()->email,
+            'contactNumber' => Auth::user()->mobile,
             'address' => 'test add',
             'description' => 'Testing Description',
             'quantity' => $request->all()['quantity']
@@ -194,13 +194,14 @@ class ProductController extends Controller
         return view('shopping.payment', compact('response'));
     }
 
-    public function initiateQuick(Request $request)
+    public function paymentQuick(Request $request)
     {
+
 
         $receiptId = Str::random(20);
 
-        $name = "name";
-        $amount = $request->input('amount') *100;
+        //  $name =  Auth::user()->name;
+        $amount = $request->input('amount') * 100;
 
         $api = new Api($this->razorpayId, $this->razorpayKey);
 
@@ -237,9 +238,9 @@ class ProductController extends Controller
             'amount' => $amount
         );
 
-        return redirect()->route('admin.home')->with('data', $data);
+        return redirect()->route('user.quick.payment')->with('data', $data);
 
-       // return view('shopping.payment', compact('response'));
+        // return view('shopping.payment', compact('response'));
     }
 
     public function payment(Request $request)
@@ -270,43 +271,6 @@ class ProductController extends Controller
         }
     }
 
-    public function paymentQuick(Request $request)
-    {
-        //to get the transcation id
-        $lastOrder = Order::orderBy('id', 'desc')->first();
-        $lastOrderId = $lastOrder->id;
-        $lastOrder->payment_id = $request->all()['rzp_paymentid'];
-        $lastOrder->update();
-
-        $data = $request->all();
-        $attributes = array(
-            'rzp_signature' => $data['rzp_signature'],
-            'rzp_paymentid' => $data['rzp_paymentid'],
-            'rzp_orderid' => $data['rzp_orderid']
-        );
-
-        dd($attributes);
-
-
-        $signatureStatus = $this->signatureVerify(
-            $request->all()['rzp_signature'],
-            $request->all()['rzp_orderid'],
-            $request->all()['rzp_paymentid'],
-        );
-
-        $payment_id = $request['rzp_paymentid'];
-        $order_id = $request['rzp_orderid'];
-        $signature = $request['rzp_signature'];
-
-
-        if ($signatureStatus == true) {
-            // Session::forget('cart');
-            // return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
-            return view('home');
-        } else {
-            return view('shopping.payment-failed-page');
-        }
-    }
 
     public function signatureVerify($_signature, $_paymentId, $_orderId)
     {
@@ -451,23 +415,6 @@ class ProductController extends Controller
         //quick add on
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         return view('shopping.checkout', ['total' => $total, 'with_tax' => $with_tax, 'total_with_tax' => $total_with_tax, 'quantity' => $q, 'product_id' => $product_id]);
 
     }
@@ -482,6 +429,50 @@ class ProductController extends Controller
         $students = UploadStudent::where('order_id', $order)->get();
 
         return view('client.productShow', compact('product', 'o', 'students', 'quantity'));
+    }
+
+    public function getPaymentQuick()
+    {
+        return view('shopping.checkout');
+    }
+
+    public function quickPay()
+    {
+        $data = $request->all();
+
+        $user = Payment::where('payment_id', $data['rzp_orderid'])->first();
+        $user->payment_done = true;
+        $user->razorpay_id = $data['rzp_paymentid'];
+
+      //  $api = new Api('rzp_test_CcRYorXwUKnx5y', 'SqHYHxVK94qmGBXwy717KHUl');
+        $api = new Api($this->razorpayId, $this->razorpayKey);
+
+
+
+
+        try {
+            $attributes = array(
+                'razorpay_signature' => $data['razorpay_signature'],
+                'razorpay_payment_id' => $data['rzp_paymentid'],
+                'razorpay_order_id' => $data['rzp_orderid']
+            );
+            $order = $api->utility->verifyPaymentSignature($attributes);
+            $success = true;
+        } catch (SignatureVerificationError $e) {
+
+            $success = false;
+        }
+
+
+        if ($success) {
+            $user->save();
+            return redirect('/admin/home');
+        } else {
+
+            return view('shopping.payment-failed-page');
+        }
+
+
     }
 
 
