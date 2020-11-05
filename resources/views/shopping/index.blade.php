@@ -17,7 +17,7 @@
                     @endif
                     <h1 class="card-title text-center">{{$product->product_name}}</h1>
                     <p class="card-text">{{$product->description}}</p>
-                    <h4 class="text-center" style="margin-top: 2rem">{{ $product->product_price }} INR</h4>
+                    <h4 class="text-center" style="margin-top: 2rem">INR {{ $product->product_price }} </h4>
                     <br>
                     <hr>
                     <!-- <a href="{{ route('user.cart.add',$product->id) }}" class="btn btn-primary float-right">Add to Card  </a> -->

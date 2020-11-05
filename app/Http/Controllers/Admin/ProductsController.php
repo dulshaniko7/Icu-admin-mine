@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Order;
 use App\Product;
 use Gate;
 use Illuminate\Http\Request;
@@ -22,9 +23,9 @@ class ProductsController extends Controller
         abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $products = Product::all();
+        $orders = Order::all();
 
-
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products', 'orders'));
     }
 
     public function create()
@@ -102,10 +103,10 @@ class ProductsController extends Controller
     {
         abort_if(Gate::denies('product_create') && Gate::denies('product_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model         = new Product();
-        $model->id     = $request->input('crud_id', 0);
+        $model = new Product();
+        $model->id = $request->input('crud_id', 0);
         $model->exists = true;
-        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

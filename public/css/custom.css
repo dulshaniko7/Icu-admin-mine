@@ -1,30 +1,30 @@
 .ck-editor__editable,
-
-.new-body{
+.new-body {
 
 }
-.new-body nav{
+
+.new-body nav {
     background-color: #2C9A2C;
 
 }
 
-.new-body nav a{
+.new-body nav a {
     color: white;
 
 }
-.new-body .main-header{
+
+.new-body .main-header {
     background-color: #2C9A2C;
 
 }
-.new-body .main-header a{
+
+.new-body .main-header a {
     color: white;
 }
 
-.new-menu a{
+.new-menu a {
     color: white !important;
 }
-
-
 
 
 textarea {
@@ -53,17 +53,23 @@ table.dataTable tbody th.select-checkbox::after {
     border-radius: 0;
 }
 
-.card form .btn{
+.card form .btn {
     border-radius: 2rem;
 }
 
-.card .btn{
+.card .btn {
     border-radius: 1.5rem;
 }
-.card .card-text{
+
+.btn {
+    border-radius: 1.5rem;
+}
+
+.card .card-text {
     font-size: medium;
     margin-top: 2rem;
 }
+
 .table.datatable {
     box-sizing: border-box;
     border-collapse: collapse;
@@ -87,16 +93,20 @@ table.dataTable thead .sorting_desc {
 .searchable-title {
     font-weight: bold;
 }
+
 .searchable-fields {
-    padding-left:5px;
+    padding-left: 5px;
 }
+
 .searchable-link {
-    padding:0 5px 0 5px;
+    padding: 0 5px 0 5px;
 }
-.searchable-link:hover   {
+
+.searchable-link:hover {
     cursor: pointer;
     background: #eaeaea;
 }
+
 .select2-results__option {
     padding-left: 0px;
     padding-right: 0px;
@@ -107,12 +117,13 @@ table.dataTable thead .sorting_desc {
     color: red;
 }
 
-.tumbnail{
+.tumbnail {
 
     max-height: 240px;
     min-height: 200px;
 
 }
+
 .card {
     position: relative;
     display: -webkit-box;
@@ -128,9 +139,10 @@ table.dataTable thead .sorting_desc {
     border-radius: 2rem
 }
 
-.qty-input{
+.qty-input {
     border-radius: 2rem !important;
 }
+
 .card > hr {
     margin-right: 0;
     margin-left: 0

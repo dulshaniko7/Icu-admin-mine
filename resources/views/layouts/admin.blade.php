@@ -220,6 +220,7 @@
           columns: ':visible'
         }
       },
+        /*
       {
         extend: 'copy',
         className: 'btn-default',
@@ -228,6 +229,8 @@
           columns: ':visible'
         }
       },
+
+
       {
         extend: 'csv',
         className: 'btn-default',
@@ -236,6 +239,8 @@
           columns: ':visible'
         }
       },
+
+         */
       {
         extend: 'excel',
         className: 'btn-default',
@@ -244,6 +249,7 @@
           columns: ':visible'
         }
       },
+        /*
       {
         extend: 'pdf',
         className: 'btn-default',
@@ -260,6 +266,8 @@
           columns: ':visible'
         }
       },
+
+         */
       {
         extend: 'colvis',
         className: 'btn-default',

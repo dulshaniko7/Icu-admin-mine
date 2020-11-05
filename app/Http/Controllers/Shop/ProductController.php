@@ -107,7 +107,7 @@ class ProductController extends Controller
         $receiptId = Str::random(20);
 
         $api = new Api($this->razorpayId, $this->razorpayKey);
-      //  $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
+        //  $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
         $order = $api->order->create(array(
                 'receipt' => $receiptId,
                 'amount' => $request->all()['amount'] * 100,
@@ -137,6 +137,8 @@ class ProductController extends Controller
         $order->user_name = Auth::user()->name;
         $order->amount = $request->amount;
         $order->quantity = $request->quantity;
+
+
         //$order->payment_id = $payment_id;
 
 
@@ -183,15 +185,70 @@ class ProductController extends Controller
         $order->quantity = $request->quantity;
         //$order->payment_id = $payment_id;
         $product = Product::find($request->product_id);
+        //  $order_count = $product->order_qty;
+        $product->order_qty = $product->order_qty + 1;
 
         Auth::user()->orders()->save($order);
         $product->orders()->save($order);
-
+        $product->update();
         return view('shopping.payment', compact('response'));
+    }
+
+    public function initiateQuick(Request $request)
+    {
+
+        $receiptId = Str::random(20);
+
+        $name = "name";
+        $amount = $request->input('amount') *100;
+
+        $api = new Api($this->razorpayId, $this->razorpayKey);
+
+
+        $order = $api->order->create(array(
+                'receipt' => $receiptId,
+                'amount' => $request->all()['amount'] * 100,
+                'currency' => 'INR'
+            )
+        );
+        $orderId = $order['id'];
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+
+        $order = new Order();
+        // $order->cart = serialize($cart);
+        $order->email = Auth::user()->email;
+        $order->user_name = Auth::user()->name;
+        $order->amount = $request->amount;
+        $order->quantity = $request->quantity;
+        //$order->payment_id = $payment_id;
+        $product = Product::find($request->product_id);
+        //  $order_count = $product->order_qty;
+        $product->order_qty = $product->order_qty + 1;
+
+        Auth::user()->orders()->save($order);
+        $product->orders()->save($order);
+        $product->update();
+
+        $data = array(
+            'order_id' => $orderId,
+            'amount' => $amount
+        );
+
+        return redirect()->route('admin.home')->with('data', $data);
+
+       // return view('shopping.payment', compact('response'));
     }
 
     public function payment(Request $request)
     {
+        //to get the transcation id
+        $lastOrder = Order::orderBy('id', 'desc')->first();
+        $lastOrderId = $lastOrder->id;
+        $lastOrder->payment_id = $request->all()['rzp_paymentid'];
+        $lastOrder->update();
 
         $signatureStatus = $this->signatureVerify(
             $request->all()['rzp_signature'],
@@ -205,7 +262,45 @@ class ProductController extends Controller
 
 
         if ($signatureStatus == true) {
-            Session::forget('cart');
+            // Session::forget('cart');
+            // return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
+            return view('home');
+        } else {
+            return view('shopping.payment-failed-page');
+        }
+    }
+
+    public function paymentQuick(Request $request)
+    {
+        //to get the transcation id
+        $lastOrder = Order::orderBy('id', 'desc')->first();
+        $lastOrderId = $lastOrder->id;
+        $lastOrder->payment_id = $request->all()['rzp_paymentid'];
+        $lastOrder->update();
+
+        $data = $request->all();
+        $attributes = array(
+            'rzp_signature' => $data['rzp_signature'],
+            'rzp_paymentid' => $data['rzp_paymentid'],
+            'rzp_orderid' => $data['rzp_orderid']
+        );
+
+        dd($attributes);
+
+
+        $signatureStatus = $this->signatureVerify(
+            $request->all()['rzp_signature'],
+            $request->all()['rzp_orderid'],
+            $request->all()['rzp_paymentid'],
+        );
+
+        $payment_id = $request['rzp_paymentid'];
+        $order_id = $request['rzp_orderid'];
+        $signature = $request['rzp_signature'];
+
+
+        if ($signatureStatus == true) {
+            // Session::forget('cart');
             // return view('shopping.payment-success-page', compact('payment_id', 'order_id', 'signature'));
             return view('home');
         } else {
@@ -353,6 +448,26 @@ class ProductController extends Controller
 
         $total_with_tax = $total + $with_tax;
 
+        //quick add on
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return view('shopping.checkout', ['total' => $total, 'with_tax' => $with_tax, 'total_with_tax' => $total_with_tax, 'quantity' => $q, 'product_id' => $product_id]);
 
     }
@@ -361,12 +476,12 @@ class ProductController extends Controller
     {
         $o = Order::find($order);
         $q = $o->quantity;
-       $quantity = $q;
+        $quantity = $q;
         $p = $o->product_id;
         $product = Product::find($p);
         $students = UploadStudent::where('order_id', $order)->get();
 
-        return view('client.productShow', compact('product', 'o', 'students','quantity'));
+        return view('client.productShow', compact('product', 'o', 'students', 'quantity'));
     }
 
 

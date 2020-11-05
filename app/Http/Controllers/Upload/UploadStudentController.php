@@ -66,16 +66,16 @@ class UploadStudentController extends Controller
             $data = array_combine($escapedHeader, $columns);
 
 
-
             // Table update
-            for ($i = 0; $i < $quantity; $i++) {
+            for ($i = 0; $i < $quantity/$quantity; $i++) {
                 $firstname = $data['firstname'];
                 $lastname = $data['lastname'];
                 $email = $data['email'];
                 $contact = $data['contact'];
                 $school = $data['schoolname'];
 
-                $upStudent = UploadStudent::firstOrNew(['email' => $email, 'first_name' => $firstname]);
+                // $upStudent = UploadStudent::firstOrNew(['email' => $email, 'first_name' => $firstname]);
+                $upStudent = new UploadStudent();
                 $upStudent->first_name = $firstname;
                 $upStudent->last_name = $lastname;
                 $upStudent->email = $email;
@@ -88,6 +88,6 @@ class UploadStudentController extends Controller
 
 
         }
-        return view('client.purchases',compact('orders'));
+        return view('client.purchases', compact('orders'));
     }
 }

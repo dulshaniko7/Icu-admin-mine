@@ -13,6 +13,7 @@
 
                         <p class="card-text">{{ $order->product->description  }}</p>
                         <h3  class="text-center" style="margin-top: 2rem; margin-bottom: 5rem;">Quantity : {{ $order->quantity }}</h3>
+
                         <hr>
                         <div class="float-right text-center" style="margin-top: 2rem; margin-bottom: 2rem;"><a class="btn btn-primary" href="{{ route('user.product.details',$order) }}">Details</a></div>
 

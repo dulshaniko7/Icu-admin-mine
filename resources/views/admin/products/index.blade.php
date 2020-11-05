@@ -2,13 +2,13 @@
 @section('content')
 <div class="content">
     @can('product_create')
-        <div style="margin-bottom: 10px;" class="row">
-            <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.products.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.product.title_singular') }}
-                </a>
-            </div>
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route('admin.products.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.product.title_singular') }}
+            </a>
         </div>
+    </div>
     @endcan
     <div class="row">
         <div class="col-lg-12">
@@ -20,92 +20,95 @@
                     <div class="table-responsive">
                         <table class=" table table-bordered table-striped table-hover datatable datatable-Product">
                             <thead>
-                                <tr>
-                                    <th width="10">
+                            <tr>
+                                <th width="10">
 
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.product.fields.product_name') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.product.fields.product_code') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.product.fields.description') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.product.fields.product_price') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.product.fields.status') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.product.fields.image') }}
-                                    </th>
-                                    <th>
-                                        &nbsp;
-                                    </th>
-                                </tr>
+                                </th>
+                                <th>
+                                    {{ trans('cruds.product.fields.product_name') }}
+                                </th>
+                                <th>
+                                    {{ trans('cruds.product.fields.product_code') }}
+                                </th>
+
+                                <th>
+                                    {{ trans('cruds.product.fields.product_price') }}
+                                </th>
+                                <th>
+                                    {{ trans('cruds.product.fields.status') }}
+                                </th>
+                                <th>
+                                    {{ trans('cruds.product.fields.image') }}
+                                </th>
+                                <th>
+                                    &nbsp;
+                                </th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach($products as $key => $product)
-                                    <tr data-entry-id="{{ $product->id }}">
-                                        <td>
+                            @foreach($products as $key => $product)
+                            <tr data-entry-id="{{ $product->id }}">
+                                <td>
 
-                                        </td>
-                                        <td>
-                                            {{ $product->product_name ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $product->product_code ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $product->description ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $product->product_price ?? '' }} INR
-                                        </td>
-                                        <td>
-                                            {{ App\Product::STATUS_RADIO[$product->status] ?? '' }}
-                                        </td>
-                                        <td>
-                                            @if($product->image)
-                                                <a href="{{ $product->image->getUrl() }}" target="_blank" style="display: inline-block">
-                                                    <img src="{{ $product->image->getUrl('thumb') }}">
-                                                </a>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @can('product_show')
-                                                <a class="btn btn-xs btn-primary" href="{{ route('admin.products.show', $product->id) }}">
-                                                    {{ trans('global.view') }}
-                                                </a>
-                                            @endcan
+                                </td>
+                                <td>
+                                    {{ $product->product_name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $product->product_code ?? '' }}
+                                </td>
 
-                                            @can('product_edit')
-                                                <a class="btn btn-xs btn-info" href="{{ route('admin.products.edit', $product->id) }}">
-                                                    {{ trans('global.edit') }}
-                                                </a>
-                                            @endcan
+                                <td>
+                                    INR {{ $product->product_price ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\Product::STATUS_RADIO[$product->status] ?? '' }}
+                                </td>
+                                <td>
+                                    @if($product->image)
+                                    <a href="{{ $product->image->getUrl() }}" target="_blank"
+                                       style="display: inline-block">
+                                        <img src="{{ $product->image->getUrl('thumb') }}">
+                                    </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @can('product_show')
+                                    <a class="btn btn-xs btn-primary"
+                                       href="{{ route('admin.products.show', $product->id) }}">
+                                        {{ trans('global.view') }}
+                                    </a>
+                                    @endcan
 
-                                            @can('product_delete')
-                                                <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                                </form>
-                                            @endcan
+                                    @can('product_edit')
+                                    <a class="btn btn-xs btn-info"
+                                       href="{{ route('admin.products.edit', $product->id) }}">
+                                        {{ trans('global.edit') }}
+                                    </a>
+                                    @endcan
 
-                                        </td>
+                                    @can('product_delete')
+                                    @if( $product->order_qty < 1 )
+                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
+                                          onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
+                                          style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger del_btn"
+                                               value="{{ trans('global.delete') }}">
+                                    </form>
+                                    @endif
+                                    @endcan
 
-                                    </tr>
-                                @endforeach
+                                </td>
+
+                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
 
 
         </div>
@@ -116,7 +119,8 @@
 @parent
 <script>
     $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+        let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+        /*
 @can('product_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
@@ -146,19 +150,31 @@
   }
   dtButtons.push(deleteButton)
 @endcan
+*/
+        $.extend(true, $.fn.dataTable.defaults, {
+            orderCellsTop: true,
+            order: [[1, 'desc']],
+            pageLength: 100,
+        });
+        let table = $('.datatable-Product:not(.ajaxTable)').DataTable({buttons: dtButtons})
+        $('a[data-toggle="tab"]').on('shown.bs.tab click', function (e) {
+            $($.fn.dataTable.tables(true)).DataTable()
+                .columns.adjust();
+        });
 
-  $.extend(true, $.fn.dataTable.defaults, {
-    orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
-    pageLength: 100,
-  });
-  let table = $('.datatable-Product:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-  $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-      $($.fn.dataTable.tables(true)).DataTable()
-          .columns.adjust();
-  });
+    })
 
-})
+
+    let delBtn = document.querySelectorAll('.del_btn')
+
+    document.addEventListener('DOMContentLoaded', function (event) {
+        del_btn_disable()
+    })
+
+    function del_btn_disable() {
+        var count = document.querySelectorAll('.count')
+
+    }
 
 </script>
 @endsection
