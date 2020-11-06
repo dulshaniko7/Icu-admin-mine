@@ -7,6 +7,7 @@ use App\Country;
 use App\Exports\StudentsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\TaxResource;
+use App\Mail\SubscribeMail;
 use App\Order;
 use App\Product;
 use App\Student;
@@ -15,6 +16,7 @@ use App\UploadStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -188,9 +190,15 @@ class ProductController extends Controller
         //  $order_count = $product->order_qty;
         $product->order_qty = $product->order_qty + 1;
 
+
         Auth::user()->orders()->save($order);
         $product->orders()->save($order);
         $product->update();
+
+        // mail
+        $email = Auth::user()->email;
+       // Mail::to($email)->send(new SubscribeMail());
+
         return view('shopping.payment', compact('response'));
     }
 
@@ -444,10 +452,8 @@ class ProductController extends Controller
         $user->payment_done = true;
         $user->razorpay_id = $data['rzp_paymentid'];
 
-      //  $api = new Api('rzp_test_CcRYorXwUKnx5y', 'SqHYHxVK94qmGBXwy717KHUl');
+        //  $api = new Api('rzp_test_CcRYorXwUKnx5y', 'SqHYHxVK94qmGBXwy717KHUl');
         $api = new Api($this->razorpayId, $this->razorpayKey);
-
-
 
 
         try {

@@ -54,34 +54,53 @@
             <div class="card" style="margin-bottom: 50px;margin-left: 2rem;margin-right: 2rem">
                 <div class="card-body">
                     <h1 class="cart-title text-center"> Student List </h1>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Contact</th>
-                            <th scope="col">School</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($students as $index => $s)
-                        <tr>
-                            <td>{{$index + 1}}</td>
-                            <td>{{$s->first_name}}</td>
-                            <td>{{$s->last_name}}</td>
-                            <td>{{$s->email}}</td>
-                            <td>{{$s->contact}}</td>
-                            <td>{{$s->school_name}}</td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
 
+                    <form action="{{ route('upload.email',$o->id)}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Resend Email</button>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"><input type="checkbox" id="selectAll"></th>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Contact</th>
+                                <th scope="col">School</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($students as $index => $s)
+                            <tr>
+                                <td><input type="checkbox" name="select[]" value="{{ $s->id }}"></td>
+                                <td>{{$index + 1}}</td>
+                                <td>{{$s->first_name}}</td>
+                                <td>{{$s->last_name}}</td>
+                                <td>{{$s->email}}</td>
+                                <td>{{$s->contact}}</td>
+                                <td>{{$s->school_name}}</td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#selectAll').click(function () {
+                $("input[type='checkbox']").prop('checked', this.checked);
+            })
+        })
+
+    </script>
+
+
+    @endsection

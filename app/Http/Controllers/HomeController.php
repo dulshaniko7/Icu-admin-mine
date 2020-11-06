@@ -42,6 +42,8 @@ class HomeController extends Controller
         $orders = Auth::user()->orders;
 
 
-        return view('client.purchases', compact('orders'));
+       // return view('client.purchases', compact('orders'));
+        return view('client.purchases-new', compact('orders'));
     }
+
 }

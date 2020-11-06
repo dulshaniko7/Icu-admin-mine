@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Upload;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SubscribeMail;
 use App\Order;
+use App\Product;
 use App\UploadStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class UploadStudentController extends Controller
@@ -31,6 +34,9 @@ class UploadStudentController extends Controller
 
         $product_id = $order->product_id;
 
+        $product = Product::find($product_id);
+
+        $product_name = $product->product_name;
 
         $validator = Validator::make($request->all(), [
             'file' => 'required'
@@ -67,7 +73,7 @@ class UploadStudentController extends Controller
 
 
             // Table update
-            for ($i = 0; $i < $quantity/$quantity; $i++) {
+            for ($i = 0; $i < $quantity / $quantity; $i++) {
                 $firstname = $data['firstname'];
                 $lastname = $data['lastname'];
                 $email = $data['email'];
@@ -84,10 +90,37 @@ class UploadStudentController extends Controller
                 $upStudent->order_id = $order_id;
                 $upStudent->product_id = $product_id;
                 $upStudent->save();
+
+
+                Mail::to($upStudent->email)->send(new SubscribeMail($upStudent, $product));
+                sleep(3);
             }
 
 
         }
-        return view('client.purchases', compact('orders'));
+        return view('client.purchases-new', compact('orders'));
+    }
+
+    public function email(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $p = $order->product_id;
+        $product = Product::find($p);
+
+        $studentIds = $request->all();
+
+        $students = $studentIds['select'];
+
+        $count = count($students);
+
+        for ($i = 0; $i < $count; $i++) {
+            $id = $students[$i];
+            $student = UploadStudent::find($id);
+
+            Mail::to($student->email)->send(new SubscribeMail($student, $product));
+            sleep(3);
+        }
+
+        return redirect()->route('user.product.details', $order);
     }
 }

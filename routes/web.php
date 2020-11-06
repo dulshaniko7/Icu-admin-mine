@@ -4,6 +4,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
+
+use App\Mail\SubscribeMail;
+use Illuminate\Support\Facades\Mail;
+
 Auth::routes();
 
 
@@ -108,7 +112,7 @@ Route::group(['prefix' => 'shop', 'as' => 'user.', 'namespace' => 'Shop', 'middl
 
     Route::get('/product/{order}', 'ProductController@viewProduct')->name('product.details');
 
-    //ne razor pay
+    //new razor pay
     Route::post('/payment','ProductController@paymentQuick' )->name('quick.payment');
     Route::get('/payment','ProductController@getPaymentQuick')->name('quick.payment');
 
@@ -124,6 +128,7 @@ Route::group(['prefix' => 'upload', 'namespace' => 'Upload','as'=>'upload.', 'mi
     //Route::get('/home', 'StudentController@index')->name('home');
     Route::get('import/{id}','UploadStudentController@create')->name('import');
     Route::post('import','UploadStudentController@store')->name('importPost');
+    Route::post('/email/{id}','UploadStudentController@email')->name('email');
 });
 
 
@@ -132,6 +137,7 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
     Route::get('/purchases','HomeController@getPurchases')->name('purchases');
 
 });
+
 
 /*
 
